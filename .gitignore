@@ -4,3 +4,6 @@
 visa-stride
 presentation/data
 **__pycache__**
+.firebaserc
+firebase.json
+presentation/404.html
