@@ -1,6 +1,7 @@
 .venv
 *.env
 .vscode
+.firebase
 visa-stride
 presentation/data
 **__pycache__**

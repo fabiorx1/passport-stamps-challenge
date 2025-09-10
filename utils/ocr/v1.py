@@ -14,7 +14,7 @@ def main(col: str, model: str):
     pipe = pipeline("image-to-text", model=model)
     df = pd.read_csv(INPUT_CSV)
     df[col] = pd.Series(dtype=str)
-    for idx, row in list(df.iterrows())[50:]:
+    for idx, row in list(df.iterrows())[:]:
         path = row["PROCESSED IMG"]
         image = Image.open(join(PRESENTATION_DIR, path))
         image = image.convert("RGB")
@@ -25,7 +25,7 @@ def main(col: str, model: str):
         text = " ".join(text)
         print('\tTEXT:', text)
         df.at[idx, col] = text
-    df.to_csv(join(OUTPUT_DIR, "stamps.csv"), index=False)
+        df.to_csv(join(OUTPUT_DIR, "stamps.csv"), index=False)
 
 def show_filled_rows(col: str):
     df = pd.read_csv(join(OUTPUT_DIR, "stamps.csv"))
