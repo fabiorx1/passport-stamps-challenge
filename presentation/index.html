@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: AI Passport Stamp Analyzer</title>
+    <style>
+        /* --- General Styles --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1, h2 {
+            color: #0056b3;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-top: 40px;
+        }
+
+        p, li {
+            font-size: 1.1em;
+            color: #495057;
+        }
+
+        strong {
+            color: #0056b3;
+        }
+
+        /* --- Flowchart Styles --- */
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .flow-step, .status-box {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-align: center;
+            width: 70%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* Arrow Connector */
+        .flow-step:not(:last-child)::after, .status-group::after {
+            content: '↓';
+            font-size: 2em;
+            color: #adb5bd;
+            position: relative;
+            top: 15px;
+        }
+        
+        .status-group::after {
+             top: 5px;
+        }
+
+        /* Status-Specific Styles */
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .status-box.developed {
+            background-color: #d4edda; /* Green */
+            border-color: #c3e6cb;
+        }
+
+        .status-box.not-developed {
+            background-color: #f8d7da; /* Red */
+            border-color: #f5c6cb;
+        }
+        
+        .status-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .status-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        /* Summary Box Style */
+        .summary {
+            background-color: #e7f5ff;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-top: 25px;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>AI-Powered Passport Stamp Analyzer 🛂</h1>
+        <p class="summary">
+            This project automates the extraction and validation of information from passport stamps. It uses a <strong>composition of small, specialized AI models</strong>, backed by a Large Language Model (LLM) like <strong>Gemini 2.5 Flash</strong>. The LLM provides correct data when smaller models fail, creating a continuous learning loop to improve accuracy over time.
+        </p>
+
+        <hr>
+
+        <h2>Solution Architecture ⚙️</h2>
+        <p>The system is designed as a sequential pipeline, where each step processes the passport image to isolate and interpret the stamps.</p>
+        <div class="flowchart">
+            <div class="flow-step"><strong>1. Binary Classification</strong><br>Decides if the image is a passport page.</div>
+            <div class="flow-step"><strong>2. Page Segmentation</strong><br>Splits the main identification page from pages with stamps.</div>
+            <div class="flow-step"><strong>3. Stamp Localization</strong><br>Finds the precise position and rotation angle of each stamp.</div>
+            <div class="flow-step"><strong>4. Optical Character Recognition (OCR)</strong><br>Extracts the date and other text from the isolated stamp.</div>
+            <div class="flow-step"><strong>5. Validation & Re-training</strong><br>Checks data consistency, standardizes date formats (e.g., to YYYY-MM-DD), and sends user feedback to a re-training pipeline.</div>
+        </div>
+
+        <hr>
+
+        <h2>Development Status 📊</h2>
+        <p>The project combines foundational data work and <a target="_blank" href="benchmark.html">benchmarking</a> with several key components still under development.</p>
+        <div class="status-grid">
+            <div class="status-group">
+                <div class="status-header">✅ Parts Developed</div>
+                <div class="status-box developed"><strong>Dataset Curation</strong><br>Gathered passport stamp images from Wikimedia Commons.</div>
+                <div class="status-box developed"><strong><a target="_blank" href="benchmark.html">Initial Benchmarking</a></strong><br>Analyzed how existing models perform on stamp recognition tasks.</div>
+                <div class="status-box developed"><strong>LLM-Powered OCR</strong><br>Used Gemini to generate superior OCR data, proving its effectiveness over standard models.</div>
+            </div>
+            <div class="status-group">
+                <div class="status-header">❌ Parts Not Yet Developed</div>
+                <div class="status-box not-developed"><strong>Core Vision Models</strong><br>Classifier, page splitter, and stamp locator algorithms.</div>
+                <div class="status-box not-developed"><strong>TrOCR Model Fine-Tuning</strong><br>Training the `microsoft/trocr` model on the high-quality Gemini data.</div>
+                <div class="status-box not-developed"><strong>Specialized ConvNets</strong><br>Smaller models to identify country, entry/exit type, etc.</div>
+            </div>
+        </div>
+
+        <hr>
+        
+        <h2>Methodology & Core Idea 💡</h2>
+        <p>
+            Standard OCR models like Microsoft's TrOCR perform poorly on the varied fonts, angles, and ink patterns of passport stamps. My <a target="_blank" href="benchmark.html">benchmark</a> showed this clearly.
+        </p>
+        <p>
+            The core of this solution is using <strong>Gemini 2.5 Flash</strong> to bridge this gap. The LLM can accurately read the stamps, providing a high-quality "answer key." This data serves two purposes:
+        </p>
+        <ul>
+            <li><strong>Fallback System:</strong> When a specialized model is uncertain, the query is passed to the LLM for a reliable answer.</li>
+            <li><strong>Training Data Generator:</strong> The verified outputs from the LLM are used to continuously fine-tune the smaller, more efficient models.</li>
+        </ul>
+        <p>
+            This approach creates a self-improving system. Furthermore, because passport stamps naturally form visual clusters based on geography (e.g., <strong>Arabic, East Asian, or Latin American stamps</strong> share design elements), we can train even more specialized models for each cluster. A "router" model would first identify the stamp's likely region and then pass it to the corresponding expert model for highly accurate OCR.
+        </p>
+        
+        <hr>
+
+        <h2>Next Steps 🚀</h2>
+        <p>The immediate next step is to take the <a target="_blank" href="benchmark.html">benchmark</a> to its logical conclusion:</p>
+        <ol>
+            <li><strong>Fine-tune Microsoft TrOCR:</strong> Train the `trocr-base-printed` model using the accurate OCR dataset generated by Gemini. This will create a powerful, specialized OCR model for passport stamps.</li>
+            <li><strong>Develop Vision Models:</strong> Implement the classification, segmentation, and localization models to build out the full pipeline.</li>
+            <li><strong>Build the Feedback Loop:</strong> Create the validation layer and the re-training pipeline to allow the system to learn from its mistakes.</li>
+            <li><strong>Develop Regional Models:</strong> Implement the "router" and specialized models for different stamp clusters to maximize accuracy.</li>
+        </ol>
+
+    </div>
+
+</body>
+</html>

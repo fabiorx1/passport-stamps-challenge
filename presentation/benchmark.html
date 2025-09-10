@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Passport Stamp OCR Benchmark</title>
+        <link rel="stylesheet" href="styles.css">
+        <script defer src="script.js"></script>
+    </head>
+    <body>
+        <h2>Passport Stamp OCR Benchmark</h2>
+        <div class="controls">
+            <div>
+                <label class="mode"><input type="radio" name="viewMode" value="paginated" checked /> Paginated (10)</label>
+                <label class="mode"><input type="radio" name="viewMode" value="full" /> Full</label>
+            </div>
+            <div class="pagination" id="paginationControls" style="display:none">
+                <button id="prevBtn">Prev</button>
+                <button id="nextBtn">Next</button>
+                <span id="pageInfo" class="small"></span>
+                <button id="reshuffleBtn">Reshuffle</button>
+            </div>
+            <div id="status" class="small"></div>
+        </div>
+        <div id="tableContainer"></div>
+    </body>
+</html>

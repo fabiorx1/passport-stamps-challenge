@@ -1,0 +1,22 @@
+Write an HTML + CSS file to show my project. You can adapt the text whatever you want.
+If its possible add fluxograms that shows the steps of my solution, the parts tha were developed, the parts that were'nt.
+Here's the description of my project:
+"""
+First I imagined the flow: a binary classifier for deciding wether it is a passport photo or not.
+Then an algorithm that splits the identification page from the stamps pages.
+Then an algorithm that finds the spot and angle of the stamps.
+Then an OCR that identifies the date.
+A validation layer to check if the date is consistent. User feedback is important at this stage to find false positives, but the system should send both real and false negatives to a re-train pipeline.
+
+I've found a dataset of passport stamps within wikipedia (https://commons.wikimedia.org/wiki/Passport_stamps_by_country_or_territory, all of the images where under public domain or CC-BY license, some of them under CC-BYSA license),
+then I worked with this dataset to understand how models are performing under these tasks.
+
+
+The way those algorithms will be trained is backed by LLMs. Gemini 2.5 Flash is already good at that.
+OCR models are performing pourly but Gemini provides the data to make it good. I've made a benchmark to show that.
+I didn't train the Microsoft TROCR model (https://huggingface.co/microsoft/trocr-base-printed) on the Gemini results but that would be my next step.
+The system could vary. There could be a small convnet to understand from which country is the stamp and if it's an entry or exit stamp.
+After that there could be a smaller OCR model because it is specially trained for each stamp.
+
+Putting in few words: my solution is a composition of small convolutional models that are backed by an LLM that gives them the answer when they don't find it, and they learn with that.
+"""
